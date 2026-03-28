@@ -1,0 +1,8 @@
+2026-03-28 13:04:01,050 - __main__ - INFO - ================================================================================
+2026-03-28 13:04:01,051 - __main__ - INFO - FILESYSTEM WATCHER STARTED
+2026-03-28 13:04:01,051 - __main__ - INFO - Log file: /mnt/f/spec-hackathon/AI_Employee_Vault/Logs/watcher_20260328_130401.log
+2026-03-28 13:04:01,052 - __main__ - INFO - ================================================================================
+2026-03-28 13:04:01,053 - __main__ - INFO - Watching directory: /mnt/f/spec-hackathon/AI_Employee_Vault/AI_Drop_Folder
+2026-03-28 13:04:01,054 - __main__ - INFO - Output directory: /mnt/f/spec-hackathon/AI_Employee_Vault/Needs_Action
+2026-03-28 13:04:01,056 - __main__ - INFO - Starting filesystem observer...
+2026-03-28 13:04:01,291 - __main__ - INFO - ✓ Observer is running. Waiting for files...

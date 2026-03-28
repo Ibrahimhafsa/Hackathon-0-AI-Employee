@@ -1,0 +1,16 @@
+2026-03-28 13:19:42,325 - __main__ - INFO - ================================================================================
+2026-03-28 13:19:42,325 - __main__ - INFO - FILESYSTEM WATCHER STARTED
+2026-03-28 13:19:42,326 - __main__ - INFO - Log file: /mnt/f/spec-hackathon/AI_Employee_Vault/Logs/watcher_20260328_131942.log
+2026-03-28 13:19:42,326 - __main__ - INFO - ================================================================================
+2026-03-28 13:19:42,328 - __main__ - INFO - Watching directory: /mnt/f/spec-hackathon/AI_Employee_Vault/AI_Drop_Folder
+2026-03-28 13:19:42,328 - __main__ - INFO - Output directory: /mnt/f/spec-hackathon/AI_Employee_Vault/Needs_Action
+2026-03-28 13:19:42,329 - __main__ - INFO - ℹ️  Using PollingObserver (WSL-compatible, polls every 2 seconds)
+2026-03-28 13:19:42,332 - __main__ - INFO - Starting filesystem observer...
+2026-03-28 13:19:42,342 - __main__ - INFO - ✅ Observer is running. Waiting for files...
+2026-03-28 13:19:42,343 - __main__ - INFO - Polling frequency: every 2 seconds
+2026-03-28 13:19:42,343 - __main__ - INFO - ================================================================================
+2026-03-28 13:20:14,798 - __main__ - INFO - 📁 File detected: final_test.txt
+2026-03-28 13:20:15,314 - __main__ - INFO -    → Name collision, using: FILE_final_test_20260328_132015.txt
+2026-03-28 13:20:15,315 - __main__ - INFO -    → Copying final_test.txt...
+2026-03-28 13:20:15,354 - __main__ - INFO - ✅ File copied to Needs_Action: FILE_final_test_20260328_132015.txt
+2026-03-28 13:20:15,361 - __main__ - INFO - ✅ Metadata created: FILE_final_test_20260328_132015_metadata.md

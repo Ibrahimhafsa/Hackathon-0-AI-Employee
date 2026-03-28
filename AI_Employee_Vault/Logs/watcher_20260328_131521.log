@@ -1,0 +1,23 @@
+2026-03-28 13:15:21,401 - __main__ - INFO - ================================================================================
+2026-03-28 13:15:21,401 - __main__ - INFO - FILESYSTEM WATCHER STARTED
+2026-03-28 13:15:21,402 - __main__ - INFO - Log file: /mnt/f/spec-hackathon/AI_Employee_Vault/Logs/watcher_20260328_131521.log
+2026-03-28 13:15:21,402 - __main__ - INFO - ================================================================================
+2026-03-28 13:15:21,403 - __main__ - INFO - Watching directory: /mnt/f/spec-hackathon/AI_Employee_Vault/AI_Drop_Folder
+2026-03-28 13:15:21,404 - __main__ - INFO - Output directory: /mnt/f/spec-hackathon/AI_Employee_Vault/Needs_Action
+2026-03-28 13:15:21,404 - __main__ - INFO - ℹ️  Using PollingObserver (WSL-compatible, polls every 2 seconds)
+2026-03-28 13:15:21,414 - __main__ - INFO - Starting filesystem observer...
+2026-03-28 13:15:21,422 - __main__ - INFO - ✅ Observer is running. Waiting for files...
+2026-03-28 13:15:21,422 - __main__ - INFO - Polling frequency: every 2 seconds
+2026-03-28 13:15:21,423 - __main__ - INFO - ================================================================================
+2026-03-28 13:15:35,512 - __main__ - INFO - 📁 File detected: test_document.txt
+2026-03-28 13:15:36,020 - __main__ - INFO -    → Copying test_document.txt...
+2026-03-28 13:15:36,037 - __main__ - INFO - ✅ File copied to Needs_Action: FILE_test_document.txt
+2026-03-28 13:15:36,042 - __main__ - INFO - ✅ Metadata created: FILE_test_document_metadata.md
+2026-03-28 13:16:01,747 - __main__ - INFO - 📁 File detected: second_file.txt
+2026-03-28 13:16:02,252 - __main__ - INFO -    → Copying second_file.txt...
+2026-03-28 13:16:02,267 - __main__ - INFO - ✅ File copied to Needs_Action: FILE_second_file.txt
+2026-03-28 13:16:02,273 - __main__ - INFO - ✅ Metadata created: FILE_second_file_metadata.md
+2026-03-28 13:20:14,533 - __main__ - INFO - 📁 File detected: final_test.txt
+2026-03-28 13:20:15,044 - __main__ - INFO -    → Copying final_test.txt...
+2026-03-28 13:20:15,057 - __main__ - INFO - ✅ File copied to Needs_Action: FILE_final_test.txt
+2026-03-28 13:20:15,136 - __main__ - INFO - ✅ Metadata created: FILE_final_test_metadata.md
