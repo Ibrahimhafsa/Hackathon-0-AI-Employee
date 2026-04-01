@@ -1,113 +1,254 @@
 # AI Employee System 🤖
 
-An autonomous AI-powered task management and execution system that intelligently processes, plans, and executes tasks with human oversight and approval.
+An autonomous, intelligent AI-powered system that acts as your digital employee—monitoring tasks, planning actions, seeking human approval, and executing work across multiple domains (email, social media, task management) with full transparency and control.
+
+---
 
 ## Project Overview
 
-The AI Employee System is an intelligent automation platform built to manage complex workflows through a Human-in-the-Loop (HITL) framework. It monitors a vault of tasks, generates executable plans, submits them for human approval, and executes approved actions—all while maintaining transparency and control at every stage.
+The **AI Employee System** is an innovative Human-in-the-Loop (HITL) automation platform that transforms how organizations handle repetitive tasks. It monitors a file-based vault, intelligently analyzes incoming tasks, generates executable plans, routes them for human approval, and executes approved actions—all while maintaining complete auditability and control.
 
-## Features
+Think of it as hiring a digital employee that:
+- ✅ Watches for incoming work
+- ✅ Plans how to complete it
+- ✅ Asks for approval before acting
+- ✅ Executes the approved work
+- ✅ Logs everything for future reference
 
-- **File Watcher System**: Monitors task directories for new items and changes
-- **Intelligent Plan Generation**: Automatically creates structured execution plans for tasks
-- **Human-in-the-Loop Approval**: Routes plans to human reviewers before execution
-- **Task Execution Engine**: Executes approved actions with full auditability
-- **Obsidian Vault Integration**: Uses Obsidian for task and plan organization
-- **Metadata Tracking**: Maintains detailed task and execution metadata
-- **Status Management**: Tracks tasks through the complete workflow lifecycle
+---
 
 ## Architecture
 
-### Core Components
-
-**Watchers**
-- File system watchers monitor the `Needs_Action` directory for new tasks
-- Automatically detect task files and metadata changes
-- Trigger the planning phase when new tasks arrive
-
-**Plans**
-- AI-generated execution plans analyze tasks and determine optimal actions
-- Plans are structured documents with step-by-step instructions
-- Stored with full context for human reviewers to understand reasoning
-
-**Approvals**
-- Human reviewers examine generated plans in the `Pending_Approval` directory
-- Plans can be approved, rejected, or sent back for revision
-- Approval workflow ensures quality control and safety
-
-**Execution**
-- Approved plans move to execution
-- Actions are performed according to plan specifications
-- Completed tasks move to `Done` directory with execution records
-
-## Workflow
+The system follows a clean, linear workflow powered by file-based state management:
 
 ```
-Needs_Action → Plans → Pending_Approval → Approved → Done
+┌─────────────┐    ┌────────────┐    ┌─────────────────┐    ┌──────────┐    ┌──────────┐
+│Watchers     │───▶│Plans       │───▶│Pending_Approval │───▶│Approved  │───▶│Execution │
+│(Monitor)    │    │(Generate)  │    │(Human Review)   │    │(Ready)   │    │(Execute) │
+└─────────────┘    └────────────┘    └─────────────────┘    └──────────┘    └──────────┘
+                                                                                    │
+                                                                                    ▼
+                                                                            ┌──────────┐
+                                                                            │Done + Log│
+                                                                            └──────────┘
 ```
 
-1. **Needs_Action**: Tasks that require processing
-2. **Plans**: AI-generated execution plans awaiting review
-3. **Pending_Approval**: Plans submitted for human decision
-4. **Approved**: Plans cleared for execution
-5. **Done**: Completed tasks with execution records
+### Core Flow
 
-## Technologies Used
+1. **Watchers** → Monitor `Needs_Action` directory for new tasks
+2. **Plan Generator** → AI analyzes task and creates executable plan
+3. **Approval Manager** → Routes plan to `Pending_Approval` for human review
+4. **Action Executor** → Executes approved plans with DRY RUN safety
+5. **Logging & Briefings** → Records results, generates CEO briefings
 
-- **Python**: Core system implementation
-- **File System Watchers**: Real-time task detection and monitoring
-- **Obsidian Vault**: Task and plan organization framework
-- **JSON/Markdown**: Task and metadata storage formats
-- **Python Standard Library**: File I/O, OS operations, threading
+---
 
-## How to Run the System
+## Features
 
-### Prerequisites
-- Python 3.8+
-- Obsidian (optional, for vault visualization)
+### Core System (Bronze Tier ✅)
+- **File-Based Vault Architecture**: Obsidian-style vault for task organization
+- **Real-Time Watchers**: Monitors task directories for changes
+- **Structured Workflow**: Clear task progression through system phases
 
-### Setup
+### Planning & Approval (Silver Tier ✅)
+- **AI-Powered Planning**: Claude AI generates detailed execution plans
+- **Human-in-the-Loop Approval**: Plans reviewed before execution
+- **Status Tracking**: Complete visibility into task lifecycle
+- **Metadata Management**: Comprehensive task and execution records
 
-1. Clone the repository:
-   ```bash
-   git clone <repository-url>
-   cd Hackathon-0-AI-Employee
-   ```
+### Automation & Intelligence (Gold Tier ✅)
+- **Smart Task Type Detection**: Automatically identifies task type (email, social media, general task)
+- **Email Automation**: Generate and manage email campaigns with template system (DRY RUN mode)
+- **Social Media Automation**: Compose and schedule social posts (DRY RUN mode)
+- **CEO Weekly Briefings**: Auto-generate executive summaries of completed tasks
+- **Multi-Task Type System**: Single framework handles diverse task types
 
-2. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
+### Safety & Control
+- **DRY RUN Mode**: Preview all actions before execution
+- **Approval Workflow**: Every action requires human sign-off
+- **Detailed Logging**: Complete audit trail of all operations
+- **Error Handling**: Graceful failure with clear feedback
 
-3. Run the main system:
-   ```bash
-   python main.py
-   ```
+---
 
-### Directory Structure
+## Folder Structure
 
 ```
 AI_Employee_Vault/
-├── Needs_Action/      # New tasks waiting to be processed
-├── Plans/             # Generated execution plans
-├── Pending_Approval/  # Plans awaiting human review
-├── Approved/          # Approved plans ready for execution
-└── Done/              # Completed tasks with records
+├── Needs_Action/         # New tasks awaiting processing
+│                          # Add task files here to trigger workflow
+├── Plans/                # Auto-generated execution plans
+│                          # Plans created by plan_generator.py
+├── Pending_Approval/     # Plans awaiting human review
+│                          # Manually approve/reject here
+├── Approved/             # Approved plans ready for execution
+│                          # Auto-moved by approval_manager.py
+├── Done/                 # Completed tasks with execution records
+│                          # Final destination after execution
+├── Logs/                 # Execution logs and audit trails
+│                          # action_executor.py output
+├── Briefings/            # CEO weekly briefing reports
+│                          # Generated by generate_ceo_briefing.py
+└── .processed_actions.json # Metadata tracking file
+                           # Tracks processed tasks (auto-maintained)
 ```
 
-### Usage
+---
 
-1. Add task files to the `Needs_Action` directory
-2. The system will monitor and generate plans
-3. Review and approve plans in the workflow
-4. Approved plans execute automatically
-5. Completed tasks appear in `Done`
+## How to Run (Step-by-Step)
+
+### Prerequisites
+- Python 3.8+
+- Required packages: `anthropic`, `python-dotenv` (see `requirements.txt`)
+- Claude API key (in `.env` file)
+
+### Setup
+
+```bash
+# Clone and navigate to project
+git clone <repository-url>
+cd Hackathon-0-AI-Employee
+
+# Create and activate virtual environment
+python3 -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Create .env file with your Claude API key
+echo "CLAUDE_API_KEY=your_key_here" > .env
+```
+
+### Running the System
+
+The system runs through a pipeline of scripts. Run them in order:
+
+```bash
+# 1. Generate plans for tasks in Needs_Action
+python plan_generator.py
+
+# 2. Manage approvals (moves approved plans to Approved folder)
+python approval_manager.py
+
+# 3. Execute approved plans
+python action_executor.py
+
+# 4. Generate CEO briefing (optional, weekly)
+python generate_ceo_briefing.py
+```
+
+**Or run as a continuous workflow:**
+```bash
+# Monitor system and process tasks continuously
+watch -n 10 'python plan_generator.py && python approval_manager.py && python action_executor.py'
+```
+
+---
+
+## Demo Flow: From Task to Completion
+
+### Step 1: Create a Task
+Add a new task file to `Needs_Action/`:
+```
+AI_Employee_Vault/Needs_Action/EMAIL_newsletter_draft.md
+```
+
+**File content example:**
+```markdown
+# Task: Draft Newsletter Email
+
+Type: EMAIL
+
+## Request
+Draft a weekly newsletter email about our product updates for clients.
+
+## Context
+- Product: AI Employee System
+- Focus: New automation features (email, social media)
+- Tone: Professional but friendly
+```
+
+### Step 2: Auto-Generate Plan
+```bash
+python plan_generator.py
+```
+✅ **Result**: Plan created in `Plans/PLAN_EMAIL_newsletter_draft.md`
+- AI analyzes the task
+- Creates step-by-step execution plan
+- Includes email template draft
+
+### Step 3: Human Approval
+Plan moves to `Pending_Approval/`. Review it:
+```bash
+# Review file: AI_Employee_Vault/Pending_Approval/PLAN_EMAIL_newsletter_draft.md
+# If approved, move to: AI_Employee_Vault/Approved/
+```
+
+Or use the approval manager:
+```bash
+python approval_manager.py
+# Interactively approve/reject plans
+```
+
+### Step 4: Execute Approved Plan
+```bash
+python action_executor.py
+```
+✅ **Result**: 
+- Email draft generated in `Done/`
+- Execution logged in `Logs/`
+- System shows preview (DRY RUN) before sending
+
+### Step 5: View Logs & Briefings
+```bash
+# Check execution logs
+cat AI_Employee_Vault/Logs/*.json
+
+# Generate CEO briefing (weekly)
+python generate_ceo_briefing.py
+# Output: AI_Employee_Vault/Briefings/CEO_BRIEFING_WEEK_14.md
+```
+
+---
+
+## Technologies Used
+
+- **Python 3.8+**: Core system implementation
+- **Claude AI API**: Intelligent task planning and analysis (via Anthropic SDK)
+- **File System**: State management (Obsidian-style vault architecture)
+- **JSON/Markdown**: Task and metadata storage
+- **Python Standard Library**: File I/O, threading, date/time handling
+
+---
 
 ## Tiers Completed
 
-- Bronze ✅
-- Silver ✅
+| Tier | Status | Features |
+|------|--------|----------|
+| **Bronze** | ✅ Complete | Basic watcher + vault structure + workflow |
+| **Silver** | ✅ Complete | Planning + approval workflow + execution |
+| **Gold** | ✅ Complete | Email automation + social media automation + CEO briefing + smart task detection |
+
+---
+
+## Future Improvements (Platinum Tier & Beyond)
+
+- **Real Email Integration**: Gmail API for actual email sending (with safety controls)
+- **Social Media APIs**: Twitter/LinkedIn API integration for live posting
+- **Cloud Deployment**: AWS/GCP deployment for 24/7 operation
+- **MCP Integrations**: Model Context Protocol for extended capabilities
+- **Advanced Analytics**: Dashboard for task metrics and performance tracking
+- **Multi-User Support**: Team collaboration features
+- **Scheduled Tasks**: Cron-based task scheduling
+- **Webhook Support**: Receive tasks via HTTP webhooks
+
+---
 
 ## Author
 
-Hafsa Ibrahim
+**Hafsa Ibrahim** | Hackathon Submission 2026
+
+---
+
+*Built with ❤️ using Claude AI and Python*
