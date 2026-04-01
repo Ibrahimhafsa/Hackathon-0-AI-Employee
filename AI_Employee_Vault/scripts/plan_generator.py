@@ -97,14 +97,41 @@ class PlanGenerator(FileSystemEventHandler):
             self.logger.warning(f"⚠️  Could not read task file: {str(e)}")
             return None
 
+    def _detect_task_type(self, content):
+        """
+        Detect task type based on content keywords.
+
+        Returns:
+            str: One of 'email_task', 'social_media_task', or 'general_task'
+        """
+        content_lower = content.lower()
+
+        # Check for email task keywords
+        if 'email' in content_lower:
+            self.logger.debug("   → Detected task type: email_task")
+            return 'email_task'
+
+        # Check for social media task keywords
+        if 'post' in content_lower or 'social' in content_lower or 'tweet' in content_lower:
+            self.logger.debug("   → Detected task type: social_media_task")
+            return 'social_media_task'
+
+        # Default to general task
+        self.logger.debug("   → Detected task type: general_task")
+        return 'general_task'
+
     def _extract_task_info(self, content):
         """Extract task information from file content"""
         task_info = {
             'title': '',
             'description': '',
             'sender': '',
-            'priority': 'Normal'
+            'priority': 'Normal',
+            'task_type': 'general_task'
         }
+
+        # Detect task type from content
+        task_info['task_type'] = self._detect_task_type(content)
 
         # Extract title (first # heading)
         title_match = re.search(r'^# (.+)$', content, re.MULTILINE)
@@ -147,7 +174,10 @@ class PlanGenerator(FileSystemEventHandler):
             with open(plan_file, 'w') as f:
                 f.write(plan_content)
 
+            # Log plan creation with task type
+            type_display = self._format_task_type(task_info.get('task_type', 'general_task'))
             self.logger.info(f"   → Plan created: {plan_filename}")
+            self.logger.info(f"   → Task Type: {type_display}")
             self.logger.info(f"   → Status: pending")
 
         except Exception as e:
@@ -159,16 +189,21 @@ class PlanGenerator(FileSystemEventHandler):
         description = task_info['description']
         sender = task_info['sender']
         priority = task_info['priority']
+        task_type = task_info['task_type']
         timestamp = datetime.now().isoformat()
 
-        # Generate step-by-step checklist based on task description
-        steps = self._generate_steps(description)
+        # Generate step-by-step checklist based on task type and description
+        steps = self._generate_steps(task_type, description)
+
+        # Human-readable task type
+        type_display = self._format_task_type(task_type)
 
         plan_content = f"""# Plan: {title}
 
 **Created:** {timestamp}
 **Status:** pending
 **Priority:** {priority}
+**Task Type:** {type_display}
 
 ## Objective
 {description}
@@ -177,6 +212,7 @@ class PlanGenerator(FileSystemEventHandler):
 - **Original Task:** {title}
 - **From:** {sender}
 - **Priority:** {priority}
+- **Task Type:** {type_display}
 
 ## Step-by-Step Checklist
 
@@ -198,21 +234,68 @@ class PlanGenerator(FileSystemEventHandler):
 """
         return plan_content
 
-    def _generate_steps(self, description):
-        """Generate step-by-step checklist from task description"""
-        # Generic steps that apply to most tasks
-        steps = [
-            "- [ ] Review task requirements and acceptance criteria",
-            "- [ ] Break down task into smaller sub-tasks if needed",
-            "- [ ] Identify any dependencies or blockers",
-            "- [ ] Research and gather necessary information",
-            "- [ ] Create implementation plan with timeline",
-            "- [ ] Begin execution of task",
-            "- [ ] Review and validate work completed",
-            "- [ ] Document findings and results",
-            "- [ ] Obtain approval from stakeholder",
-            "- [ ] Mark task as complete"
-        ]
+    def _format_task_type(self, task_type):
+        """Convert task_type code to human-readable format"""
+        type_map = {
+            'email_task': 'Email Task',
+            'social_media_task': 'Social Media Task',
+            'general_task': 'General Task'
+        }
+        return type_map.get(task_type, 'General Task')
+
+    def _generate_steps(self, task_type, description):
+        """
+        Generate step-by-step checklist based on task type.
+
+        Args:
+            task_type (str): Type of task (email_task, social_media_task, general_task)
+            description (str): Task description
+
+        Returns:
+            str: Formatted step-by-step checklist
+        """
+        if task_type == 'email_task':
+            steps = [
+                "- [ ] Review email task requirements",
+                "- [ ] Draft email content and subject line",
+                "- [ ] Identify recipient(s) and verify email addresses",
+                "- [ ] Check for CC/BCC if applicable",
+                "- [ ] Review email for tone and completeness",
+                "- [ ] Verify all details are accurate",
+                "- [ ] Prepare email for sending",
+                "- [ ] Obtain approval from stakeholder",
+                "- [ ] Send email or move to Approved folder",
+                "- [ ] Document send timestamp and recipient confirmation",
+                "- [ ] Mark task as complete"
+            ]
+        elif task_type == 'social_media_task':
+            steps = [
+                "- [ ] Review social media task requirements",
+                "- [ ] Research topic and gather content",
+                "- [ ] Draft post content and captions",
+                "- [ ] Select appropriate hashtags and mentions",
+                "- [ ] Add media (images, videos, links) if needed",
+                "- [ ] Review for brand consistency and tone",
+                "- [ ] Check for spelling, grammar, and clarity",
+                "- [ ] Preview post on target platform",
+                "- [ ] Obtain approval from stakeholder",
+                "- [ ] Schedule or publish post",
+                "- [ ] Monitor engagement and comments",
+                "- [ ] Mark task as complete"
+            ]
+        else:  # general_task
+            steps = [
+                "- [ ] Review task requirements and acceptance criteria",
+                "- [ ] Break down task into smaller sub-tasks if needed",
+                "- [ ] Identify any dependencies or blockers",
+                "- [ ] Research and gather necessary information",
+                "- [ ] Create implementation plan with timeline",
+                "- [ ] Begin execution of task",
+                "- [ ] Review and validate work completed",
+                "- [ ] Document findings and results",
+                "- [ ] Obtain approval from stakeholder",
+                "- [ ] Mark task as complete"
+            ]
 
         return "\n".join(steps)
 
