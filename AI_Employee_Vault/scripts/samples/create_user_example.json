@@ -1,0 +1,7 @@
+{
+  "action": "create_user",
+  "recipient": "alice.smith@company.com",
+  "subject": "New User Creation",
+  "content": "Create new user account for Alice Smith with admin permissions",
+  "timestamp": "2026-03-31T11:00:00Z"
+}

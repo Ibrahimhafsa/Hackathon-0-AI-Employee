@@ -1,0 +1,7 @@
+{
+  "action": "send_email",
+  "recipient": "user@example.com",
+  "subject": "Account Activation",
+  "content": "Your new account has been activated. Please log in with your credentials.",
+  "timestamp": "2026-03-31T10:30:00Z"
+}

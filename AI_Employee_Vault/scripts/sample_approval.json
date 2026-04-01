@@ -1,0 +1,7 @@
+{
+  "action": "send_email",
+  "recipient": "john.doe@company.com",
+  "subject": "Welcome to the team!",
+  "content": "Welcome aboard! Your account has been activated.",
+  "timestamp": "2026-03-31T10:30:00Z"
+}

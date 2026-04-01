@@ -1,0 +1,7 @@
+{
+  "action": "update_database",
+  "recipient": "prod_db_001",
+  "subject": "Apply Schema Migration v2.5",
+  "content": "Execute migration to add new columns for user preferences table",
+  "timestamp": "2026-03-31T12:00:00Z"
+}
