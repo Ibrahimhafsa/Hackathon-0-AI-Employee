@@ -66,7 +66,7 @@ def read_approval_file(filepath):
 
 
 def simulate_action(action_data):
-    """Simulate performing the action (e.g., sending email, creating user, etc)."""
+    """Simulate performing the action (e.g., sending email, posting social media, creating user, etc)."""
     action_type = action_data.get('action', 'unknown')
     recipient = action_data.get('recipient', 'N/A')
     subject = action_data.get('subject', 'No subject')
@@ -97,6 +97,22 @@ def simulate_action(action_data):
             logger.info(f"      BCC: {bcc}")
         logger.info(f"      Priority: {priority}")
         logger.info(f"      Full body:\n{_format_email_body(body)}")
+    elif action_type == 'post_social_media':
+        logger.info(f"   📱 {'[DRY RUN] Would post' if mode == 'DRY_RUN' else 'Posting'} to social media")
+        # Enhanced social media logging
+        platform = action_data.get('platform', 'unknown')
+        post_content = action_data.get('content', 'No content')
+        hashtags = action_data.get('hashtags', '')
+        mentions = action_data.get('mentions', '')
+        priority = action_data.get('priority', 'Normal')
+
+        logger.info(f"      Platform: {platform.capitalize()}")
+        logger.info(f"      Priority: {priority}")
+        logger.info(f"      Full content:\n{_format_post_body(post_content)}")
+        if hashtags:
+            logger.info(f"      Hashtags: {hashtags}")
+        if mentions:
+            logger.info(f"      Mentions: {mentions}")
     elif action_type == 'create_user':
         logger.info(f"   👤 Simulating user creation for: {recipient}")
     elif action_type == 'update_database':
@@ -111,6 +127,13 @@ def simulate_action(action_data):
 
 def _format_email_body(body):
     """Format email body for logging with proper indentation."""
+    lines = body.split('\n')
+    formatted = '\n'.join(f"         {line}" for line in lines)
+    return formatted
+
+
+def _format_post_body(body):
+    """Format social media post body for logging with proper indentation."""
     lines = body.split('\n')
     formatted = '\n'.join(f"         {line}" for line in lines)
     return formatted

@@ -1,0 +1,13 @@
+{
+  "action": "post_social_media",
+  "type": "social_media_post",
+  "platform": "twitter",
+  "content": "\ud83d\ude80 Excited to announce the launch of our new AI-powered features! \n\nThis breakthrough will transform how teams collaborate and make decisions. Available now for all users.\n\nLearn more \u2192 [link]\n\n#NewProduct #Innovation #TechLaunch\n\n---\n*Task created for AI Employee Vault - Social Media Integration (DRY RUN)*",
+  "hashtags": "#NewProduct #Innovation #TechLaunch",
+  "mentions": "@TechNews @IndustryLeaders",
+  "from": "AI_Employee_Vault",
+  "priority": "High",
+  "created_at": "2026-04-01T19:16:11.549785",
+  "dry_run": true,
+  "mode": "DRY_RUN"
+}

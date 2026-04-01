@@ -1,10 +1,12 @@
 {
   "processed": [
-    "APPROVAL_PLAN_TASK_dummy_041.md",
-    "APPROVAL_PLAN_TEST_high_priority.md",
     "APPROVAL_PLAN_TASK_dummy_045.md",
-    "APPROVAL_PLAN_TASK_dummy_057.md",
     "APPROVAL_PLAN_EMAIL_welcome_001.md",
-    "test_sample.json"
+    "SOCIAL_APPROVAL_SOCIAL_twitter_product_launch.json",
+    "test_sample.json",
+    "SOCIAL_APPROVAL_SOCIAL_linkedin_company_news.json",
+    "APPROVAL_PLAN_TASK_dummy_057.md",
+    "APPROVAL_PLAN_TEST_high_priority.md",
+    "APPROVAL_PLAN_TASK_dummy_041.md"
   ]
 }
