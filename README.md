@@ -249,6 +249,3 @@ python generate_ceo_briefing.py
 
 **Hafsa Ibrahim** | Hackathon Submission 2026
 
----
-
-*Built with ❤️ using Claude AI and Python*
