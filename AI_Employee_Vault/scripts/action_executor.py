@@ -71,15 +71,32 @@ def simulate_action(action_data):
     recipient = action_data.get('recipient', 'N/A')
     subject = action_data.get('subject', 'No subject')
     content = action_data.get('content', 'No content')
+    mode = action_data.get('mode', 'NORMAL')
 
     logger.info(f"🚀 Executing action: {action_type}")
+    if mode == 'DRY_RUN':
+        logger.info(f"   [DRY RUN MODE] No actual action will be performed")
     logger.info(f"   Recipient: {recipient}")
     logger.info(f"   Subject: {subject}")
     logger.info(f"   Content preview: {content[:100]}...")
 
     # Simulate different actions
     if action_type == 'send_email':
-        logger.info(f"   ✉️  Simulating email to {recipient} with subject: {subject}")
+        logger.info(f"   ✉️  {'[DRY RUN] Would send' if mode == 'DRY_RUN' else 'Sending'} email to {recipient}")
+        # Enhanced email logging
+        body = action_data.get('body', content)
+        cc = action_data.get('cc', '')
+        bcc = action_data.get('bcc', '')
+        email_from = action_data.get('from', 'system@ai_employee_vault')
+        priority = action_data.get('priority', 'Normal')
+
+        logger.info(f"      From: {email_from}")
+        if cc:
+            logger.info(f"      CC: {cc}")
+        if bcc:
+            logger.info(f"      BCC: {bcc}")
+        logger.info(f"      Priority: {priority}")
+        logger.info(f"      Full body:\n{_format_email_body(body)}")
     elif action_type == 'create_user':
         logger.info(f"   👤 Simulating user creation for: {recipient}")
     elif action_type == 'update_database':
@@ -90,6 +107,13 @@ def simulate_action(action_data):
     # Success simulation
     logger.info(f"   ✓ Action completed successfully")
     return True
+
+
+def _format_email_body(body):
+    """Format email body for logging with proper indentation."""
+    lines = body.split('\n')
+    formatted = '\n'.join(f"         {line}" for line in lines)
+    return formatted
 
 
 def process_file(filename, approved_path):
