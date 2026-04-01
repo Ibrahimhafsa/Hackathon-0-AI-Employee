@@ -198,6 +198,7 @@
   },
   "active": "917ac2dba217ca1c",
   "lastOpenFiles": [
+    "Dashboard.md.tmp.2514.1775076871045",
     "Done/APPROVAL_PLAN_TASK_dummy_039.md",
     "Approved/APPROVAL_PLAN_TASK_dummy_039.md",
     "Needs_Action/EMAIL_test_final1.md",
@@ -232,7 +233,6 @@
     "Pending_Approval/APPROVAL_PLAN_TASK_multitype_social_test.md",
     "Pending_Approval/APPROVAL_PLAN_TASK_multitype_email_test.md",
     "Plans/PLAN_TASK_multitype_general_test.md",
-    "Plans/PLAN_TASK_multitype_email_test.md",
-    "Plans/PLAN_TASK_multitype_social_test.md"
+    "Plans/PLAN_TASK_multitype_email_test.md"
   ]
 }
